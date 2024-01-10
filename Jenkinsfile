@@ -11,16 +11,15 @@ pipeline {
            steps {
                       sh "terrafile -f env=${ENV}/Terrafile"
                       sh "terraform init -backend-config=env-${ENV}-backend.tfvars"
-
            } 
         }
-      stage('terraform plan'){
+      stage('terraform plan') {
            steps {
                       sh "terraform  plan -var-file=env-${ENV}/${ENV}.tfvars"
            }
         }
                       
-      stage('terraform apply'){
+      stage('terraform apply') {
            steps {
                       sh "terraform ${ACTION} -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
            }
